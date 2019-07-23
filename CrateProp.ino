@@ -10,8 +10,6 @@
 
 #define AUDIO_BOOT 1
 #define AUDIO_VOICE 2
-#define AUDIO_DBG_MOTION_START 3
-#define AUDIO_DBG_MOTION_END 4
 
 int state = LOW;
 
@@ -38,7 +36,6 @@ void motionDetected() {
 }
 
 void motionStopped(){
-  playAudio(AUDIO_DBG_MOTION_END);
   delay(15000); //Cooldown
 }
 

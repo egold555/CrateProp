@@ -32,10 +32,16 @@ void motionDetected() {
     playAudio(AUDIO_VOICE);
     digitalWrite(PIN_DRILL, HIGH);
     digitalWrite(PIN_LIGHT, HIGH);
-    delay(5000);
+    for (int i = 0; i < 5; ++i) {
+      delay(random(600, 1200)); // on time
+      digitalWrite(PIN_DRILL, LOW);
+      delay(random(200,600)); // off time
+      
+      digitalWrite(PIN_DRILL, HIGH);
+    }
     digitalWrite(PIN_DRILL, LOW);
-    delay(3000);
     digitalWrite(PIN_LIGHT, LOW);
+    delay(3000);
 }
 
 void motionStopped(){

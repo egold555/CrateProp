@@ -25,14 +25,17 @@ void setup() {
   randomSeed(analogRead(A0) + 37 * analogRead(A1));
   
   playAudio(AUDIO_BOOT);
+  delay(3000);
 }
 
 void motionDetected() {
     playAudio(AUDIO_VOICE);
     digitalWrite(PIN_DRILL, HIGH);
+    digitalWrite(PIN_LIGHT, HIGH);
     delay(5000);
     digitalWrite(PIN_DRILL, LOW);
     delay(3000);
+    digitalWrite(PIN_LIGHT, LOW);
 }
 
 void motionStopped(){

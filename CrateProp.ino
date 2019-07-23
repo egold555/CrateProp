@@ -5,6 +5,7 @@
 #define PIN_AUDIO_TX 10
 
 #define PIN_DRILL 5
+#define PIN_LIGHT 6
 #define PIN_SENSOR 2
 
 #define AUDIO_BOOT 1
@@ -17,25 +18,26 @@ int state = LOW;
 void setup() {
   setupAudio(PIN_AUDIO_RX, PIN_AUDIO_TX);
   pinMode(PIN_DRILL, OUTPUT);
+  pinMode(PIN_LIGHT, OUTPUT);
   pinMode(PIN_SENSOR, INPUT);
-  digitalWrite(PIN_DRILL, HIGH);
+
+  digitalWrite(PIN_DRILL, LOW);
+  digitalWrite(PIN_LIGHT, LOW);
+  
   randomSeed(analogRead(A0) + 37 * analogRead(A1));
-  Serial.begin(9600);
-  Serial.println(F("Hello World."));
+  
   playAudio(AUDIO_BOOT);
 }
 
 void motionDetected() {
-    Serial.println(F("Motion detected!"));
     playAudio(AUDIO_VOICE);
-    digitalWrite(PIN_DRILL, LOW);
-    delay(7500);
     digitalWrite(PIN_DRILL, HIGH);
+    delay(5000);
+    digitalWrite(PIN_DRILL, LOW);
     delay(3000);
 }
 
 void motionStopped(){
-  Serial.println(F("Motion stopped!"));
   playAudio(AUDIO_DBG_MOTION_END);
   delay(15000); //Cooldown
 }
